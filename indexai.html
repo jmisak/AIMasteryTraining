@@ -1,0 +1,2797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lieberman Market Research - AI Excellence Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --primary: #2563eb;
+        --primary-dark: #1e40af;
+        --secondary: #10b981;
+        --accent: #8b5cf6;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --background: #f8fafc;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border: #e2e8f0;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        line-height: 1.6;
+    }
+
+    .login-container {
+        background: white;
+        border-radius: 20px;
+        padding: 48px;
+        max-width: 480px;
+        margin: 10vh auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .login-title {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+    }
+
+    .login-subtitle {
+        color: var(--text-secondary);
+        margin-bottom: 32px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    
+    .form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .login-button {
+        width: 100%;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .login-button:hover {
+        background: var(--primary-dark);
+    }
+
+    .error-message {
+        color: var(--danger);
+        background: #fee;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 16px;
+        display: none;
+    }
+
+    .platform {
+        display: none;
+        background: var(--background);
+        min-height: 100vh;
+    }
+
+    .top-nav {
+        background: white;
+        padding: 16px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav-brand {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .nav-user {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .user-badge {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .btn-logout {
+        background: var(--danger);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 32px;
+    }
+
+    .hero {
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border-radius: 16px;
+        padding: 48px;
+        color: white;
+        margin-bottom: 32px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.95;
+        margin-bottom: 32px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .stat-card {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.9;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 32px;
+    }
+
+    .sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        height: fit-content;
+        position: sticky;
+        top: 100px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .sidebar-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .module-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .module-btn {
+        width: 100%;
+        text-align: left;
+        padding: 16px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        background: var(--background);
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .module-btn:hover {
+        border-color: var(--primary);
+        transform: translateX(4px);
+    }
+
+    .module-btn.active {
+        border-color: var(--primary);
+        background: #eff6ff;
+    }
+
+    .module-btn.completed {
+        border-color: var(--secondary);
+        background: #f0fdf4;
+    }
+
+    .module-icon {
+        font-size: 1.5rem;
+    }
+
+    .module-info {
+        flex: 1;
+    }
+
+    .module-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .module-meta {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+    }
+
+    .content-area {
+        background: white;
+        border-radius: 12px;
+        padding: 40px;
+        min-height: 600px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .content-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+    }
+
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--text-primary);
+    }
+
+    .card {
+        background: var(--background);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .warning-box {
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border-left: 4px solid var(--warning);
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .success-box {
+        background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+        border-left: 4px solid var(--secondary);
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+
+    .btn-success {
+        background: var(--secondary);
+        color: white;
+    }
+
+    .code-block {
+        background: #1e293b;
+        color: #e2e8f0;
+        padding: 16px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        margin: 16px 0;
+        overflow-x: auto;
+    }
+
+    ul, ol {
+        margin-left: 24px;
+        margin-bottom: 16px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    strong {
+        color: var(--text-primary);
+    }
+
+    .progress-section {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 2px solid var(--border);
+    }
+
+    .progress-bar {
+        background: var(--border);
+        border-radius: 50px;
+        height: 12px;
+        overflow: hidden;
+        margin: 16px 0;
+    }
+
+    .progress-fill {
+        background: linear-gradient(90deg, #10b981, #34d399);
+        height: 100%;
+        transition: width 1s;
+    }
+
+    .quiz-container {
+        background: #f8fafc;
+        padding: 24px;
+        border-radius: 12px;
+        margin: 20px 0;
+    }
+
+    .quiz-question {
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .quiz-option {
+        padding: 12px;
+        background: white;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .quiz-option:hover {
+        border-color: var(--primary);
+    }
+
+    @media (max-width: 1024px) {
+        .main-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .sidebar {
+            position: static;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="login-screen" class="login-container">
+        <div style="font-size: 4rem; text-align: center; margin-bottom: 20px;">📊</div>
+        <h1 class="login-title">Lieberman Market Research</h1>
+        <p class="login-subtitle">AI Excellence Training Platform</p>
+    <form id="login-form">
+        <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="username" class="form-input" required autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="password" class="form-input" required autocomplete="current-password">
+        </div>
+        
+        <button type="submit" class="login-button">Access Platform</button>
+        
+        <div id="error-message" class="error-message">
+            Invalid credentials. Try: demo / lieberman123
+        </div>
+    </form>
+    
+    <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 16px; margin-top: 24px;">
+        <p style="font-size: 0.875rem; color: #78716c;"><strong>Demo:</strong> demo / lieberman123</p>
+    </div>
+</div>
+
+<div id="platform" class="platform">
+    <nav class="top-nav">
+        <div class="nav-brand">📊 Lieberman AI Excellence</div>
+        <div class="nav-user">
+            <div class="user-badge" id="user-display">User</div>
+            <button class="btn-logout" id="logout-btn">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="hero">
+            <h1 class="hero-title">Master AI-Powered Market Research</h1>
+            <p class="hero-subtitle">Transform your research capabilities with cutting-edge AI tools while maintaining the highest standards of quality and confidentiality</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="xp-display">0</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="modules-display">0/10</div>
+                    <div class="stat-label">Modules</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="level-display">1</div>
+                    <div class="stat-label">Level</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="rank-display">Novice</div>
+                    <div class="stat-label">Rank</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="sidebar">
+                <div class="sidebar-title">Learning Journey</div>
+                
+                <div class="module-list">
+                    <button class="module-btn active" data-module="dashboard">
+                        <span class="module-icon">🏠</span>
+                        <div class="module-info">
+                            <div class="module-title">Dashboard</div>
+                            <div class="module-meta">Overview</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="fundamentals">
+                        <span class="module-icon">🧠</span>
+                        <div class="module-info">
+                            <div class="module-title">AI Fundamentals</div>
+                            <div class="module-meta">45 min • 500 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="prompt-engineering">
+                        <span class="module-icon">💡</span>
+                        <div class="module-info">
+                            <div class="module-title">Prompt Engineering</div>
+                            <div class="module-meta">60 min • 600 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="survey-design">
+                        <span class="module-icon">📋</span>
+                        <div class="module-info">
+                            <div class="module-title">Survey Design</div>
+                            <div class="module-meta">50 min • 550 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="data-analysis">
+                        <span class="module-icon">📊</span>
+                        <div class="module-info">
+                            <div class="module-title">Data Analysis</div>
+                            <div class="module-meta">55 min • 600 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="qualitative">
+                        <span class="module-icon">💬</span>
+                        <div class="module-info">
+                            <div class="module-title">Qualitative Research</div>
+                            <div class="module-meta">45 min • 500 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="ethics">
+                        <span class="module-icon">⚖️</span>
+                        <div class="module-info">
+                            <div class="module-title">Ethics & Security</div>
+                            <div class="module-meta">40 min • 450 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="client-solutions">
+                        <span class="module-icon">🤝</span>
+                        <div class="module-info">
+                            <div class="module-title">Client Solutions</div>
+                            <div class="module-meta">50 min • 550 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="advanced">
+                        <span class="module-icon">🚀</span>
+                        <div class="module-info">
+                            <div class="module-title">Advanced Techniques</div>
+                            <div class="module-meta">60 min • 650 XP</div>
+                        </div>
+                    </button>
+
+                    <button class="module-btn" data-module="certification">
+                        <span class="module-icon">🎓</span>
+                        <div class="module-info">
+                            <div class="module-title">Certification</div>
+                            <div class="module-meta">90 min • 1000 XP</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="progress-section">
+                    <strong>Overall Progress</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+                    </div>
+                    <div style="text-align: center; color: #64748b; font-size: 0.875rem;" id="progress-text">0% Complete</div>
+                </div>
+            </div>
+
+            <div class="content-area" id="content-area"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const credentials = {
+        'demo': 'lieberman123',
+        'admin': 'secure2024',
+        'analyst': 'research123'
+    };
+
+    let userProfile = {
+        username: '',
+        xp: 0,
+        level: 1,
+        completedModules: new Set()
+    };
+
+    const moduleContent = {
+        dashboard: {
+            xp: 0,
+            content: `
+                <h1 class="content-title">Welcome to AI Excellence Training</h1>
+                
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 12px;">🎯 Program Objectives</h3>
+                    <p>This certification program will transform you into an AI-powered market research professional. You'll learn to leverage cutting-edge AI tools while maintaining the highest standards of research integrity, data security, and client confidentiality.</p>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">What You'll Master</h2>
+                    <div class="grid-2">
+                        <div class="card">
+                            <div class="card-title">🧠 AI Fundamentals</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Understand AI capabilities and limitations specific to market research</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>LLMs vs. Enterprise AI vs. Research Tools</li>
+                                <li>When to use (and not use) AI</li>
+                                <li>Critical security protocols</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">💡 Prompt Engineering</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Craft prompts that generate professional-grade insights</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>CLEAR framework mastery</li>
+                                <li>Advanced techniques for research</li>
+                                <li>Iterative refinement strategies</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">📋 Survey Design</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Design better questionnaires with AI assistance</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>Questionnaire development</li>
+                                <li>Bias detection and testing</li>
+                                <li>Sampling optimization</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">📊 Data Analysis</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Accelerate analysis while maintaining rigor</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>Open-ended response coding</li>
+                                <li>Statistical guidance</li>
+                                <li>Insight generation frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">💬 Qualitative Research</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Enhance qual analysis with AI tools</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>Transcript analysis</li>
+                                <li>Thematic coding</li>
+                                <li>Interview guide creation</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">⚖️ Ethics & Security</div>
+                            <p style="color: #64748b; margin-bottom: 12px;">Protect data while using AI responsibly</p>
+                            <ul style="font-size: 0.9rem; color: #64748b;">
+                                <li>TRUST framework</li>
+                                <li>Compliance (GDPR, HIPAA)</li>
+                                <li>Client communication</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Learning Path</h2>
+                    <div class="card">
+                        <p><strong>Recommended Sequence:</strong></p>
+                        <ol>
+                            <li><strong>AI Fundamentals</strong> - Build your foundation (45 min)</li>
+                            <li><strong>Prompt Engineering</strong> - Master the core skill (60 min)</li>
+                            <li><strong>Survey Design</strong> - Apply to questionnaires (50 min)</li>
+                            <li><strong>Data Analysis</strong> - Accelerate insights (55 min)</li>
+                            <li><strong>Qualitative Research</strong> - Enhance qual work (45 min)</li>
+                            <li><strong>Ethics & Security</strong> - Protect client data (40 min)</li>
+                            <li><strong>Client Solutions</strong> - Deliver value (50 min)</li>
+                            <li><strong>Advanced Techniques</strong> - Push boundaries (60 min)</li>
+                            <li><strong>Certification Exam</strong> - Earn your credential (90 min)</li>
+                        </ol>
+                        <p style="margin-top: 16px; color: #64748b;"><strong>Total Time Investment:</strong> 8-10 hours | <strong>Validity:</strong> 12 months</p>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="margin-bottom: 12px;">🚀 Ready to Transform Your Research?</h3>
+                    <p style="margin-bottom: 16px;">Begin with <strong>AI Fundamentals</strong> to establish your foundation, then progress through each module. All content is self-paced with practical exercises and real-world examples.</p>
+                    <button class="btn btn-primary" onclick="loadModule('fundamentals')">Start Module 1: AI Fundamentals</button>
+                </div>
+            `
+        },
+
+        fundamentals: {
+            xp: 500,
+            content: `
+                <h1 class="content-title">🧠 Module 1: AI Fundamentals for Market Research</h1>
+                
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 12px;">Learning Objectives</h3>
+                    <p>By the end of this module, you will be able to:</p>
+                    <ul>
+                        <li>Distinguish between different AI tool categories and select the right tool for each task</li>
+                        <li>Understand AI capabilities and limitations in market research contexts</li>
+                        <li>Apply the 70-30 Human-AI Partnership Model</li>
+                        <li>Follow critical data security protocols to protect client information</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Understanding the AI Landscape</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Category 1: Large Language Models (LLMs)</div>
+                        <p><strong>Examples:</strong> ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google), Llama (Meta)</p>
+                        
+                        <p style="margin-top: 16px;"><strong>✅ Best Use Cases in Market Research:</strong></p>
+                        <ul>
+                            <li><strong>Survey Development:</strong> Generate question batteries, refine wording, create response scales</li>
+                            <li><strong>Qualitative Analysis:</strong> Code open-ended responses, identify themes, extract quotes</li>
+                            <li><strong>Report Writing:</strong> Draft executive summaries, create section narratives, structure findings</li>
+                            <li><strong>Research Design:</strong> Brainstorm methodologies, identify variables, suggest frameworks</li>
+                            <li><strong>Content Creation:</strong> Develop personas, write scenarios, create stimulus materials</li>
+                            <li><strong>Translation:</strong> Initial translation drafts (always validate with experts)</li>
+                        </ul>
+
+                        <p style="margin-top: 16px;"><strong>❌ Critical Limitations:</strong></p>
+                        <ul>
+                            <li><strong>Hallucinations:</strong> Can generate plausible but factually incorrect information</li>
+                            <li><strong>Knowledge Cutoff:</strong> No access to real-time data or events after training</li>
+                            <li><strong>No Primary Research:</strong> Cannot conduct actual surveys, interviews, or observations</li>
+                            <li><strong>Bias Risk:</strong> May reflect biases from training data</li>
+                            <li><strong>No Proprietary Access:</strong> Cannot access your internal databases or client files</li>
+                        </ul>
+
+                        <div class="warning-box" style="margin-top: 16px;">
+                            <strong>🔒 SECURITY CRITICAL:</strong> Never input client names, personally identifiable information (PII), project codenames, or confidential data into public LLMs. Always anonymize data completely before use, or utilize enterprise-approved tools with proper security controls.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Category 2: Enterprise AI Solutions</div>
+                        <p><strong>Examples:</strong> Microsoft Copilot for 365, Google Workspace AI, Salesforce Einstein, IBM Watson</p>
+                        
+                        <p style="margin-top: 16px;"><strong>Key Advantages:</strong></p>
+                        <ul>
+                            <li><strong>Data Sovereignty:</strong> Information stays within your organization's security perimeter</li>
+                            <li><strong>Compliance Ready:</strong> Meet GDPR, CCPA, HIPAA, and industry-specific regulations</li>
+                            <li><strong>Audit Trails:</strong> Complete logging and governance capabilities</li>
+                            <li><strong>IT Oversight:</strong> Centrally managed and monitored by your IT department</li>
+                            <li><strong>Integration:</strong> Works seamlessly with existing research platforms</li>
+                        </ul>
+
+                        <p style="margin-top: 16px;"><strong>When to Use Enterprise AI:</strong></p>
+                        <ul>
+                            <li>Processing actual survey responses with client data</li>
+                            <li>Analyzing confidential interview transcripts</li>
+                            <li>Working with proprietary research methodologies</li>
+                            <li>Any task involving non-anonymized client information</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Category 3: Specialized Research AI Tools</div>
+                        <p><strong>Examples:</strong> Qualtrics AI, SurveyMonkey Genius, Remesh AI, Discuss.io AI, Zappi</p>
+                        
+                        <p style="margin-top: 16px;"><strong>Research-Specific Features:</strong></p>
+                        <ul>
+                            <li><strong>Survey Optimization:</strong> Automated question testing, flow optimization, bias detection</li>
+                            <li><strong>Quality Control:</strong> Automated response validation, bot detection, data cleaning</li>
+                            <li><strong>Real-Time Analysis:</strong> Live sentiment tracking, instant theme identification</li>
+                            <li><strong>Predictive Analytics:</strong> Response pattern forecasting, sample optimization</li>
+                            <li><strong>Research-Trained Models:</strong> Built specifically for market research tasks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">The 70-30 Human-AI Partnership Model</h2>
+                    
+                    <div class="grid-2">
+                        <div class="highlight-box">
+                            <h4 style="margin-bottom: 12px;">70% HUMAN CONTRIBUTION</h4>
+                            <ul style="margin: 0;">
+                                <li><strong>Strategic Thinking:</strong> Research objectives, methodology design</li>
+                                <li><strong>Expert Interpretation:</strong> Context, nuance, cultural understanding</li>
+                                <li><strong>Client Management:</strong> Relationships, communication, trust-building</li>
+                                <li><strong>Quality Control:</strong> Validation, verification, final judgment</li>
+                                <li><strong>Ethical Decisions:</strong> Privacy, consent, responsible use</li>
+                                <li><strong>Business Recommendations:</strong> Strategic implications, action plans</li>
+                            </ul>
+                        </div>
+
+                        <div class="card">
+                            <h4 style="margin-bottom: 12px;">30% AI CONTRIBUTION</h4>
+                            <ul style="margin: 0;">
+                                <li><strong>Data Processing:</strong> Coding, categorization, cleaning</li>
+                                <li><strong>Pattern Recognition:</strong> Theme identification, trend spotting</li>
+                                <li><strong>Content Generation:</strong> Draft creation, summarization</li>
+                                <li><strong>Preliminary Analysis:</strong> Initial insights, hypothesis generation</li>
+                                <li><strong>Scale & Speed:</strong> Processing large datasets quickly</li>
+                                <li><strong>Consistency:</strong> Applying frameworks uniformly</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="success-box" style="margin-top: 20px;">
+                        <h4 style="margin-bottom: 12px;">💡 Core Principle</h4>
+                        <p><strong>AI is your research assistant, not your replacement.</strong> You remain the expert who guides, validates, and interprets all AI outputs. Think of AI as a highly capable junior researcher who can process information quickly but needs your expertise for strategic thinking and final decisions.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Critical Data Security Protocols</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Three-Tier Data Classification System</div>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">📱 TIER 1: Public AI Tools</h4>
+                            <p style="margin-top: 8px;"><strong>Allowed:</strong></p>
+                            <ul>
+                                <li>✅ Generic industry questions ("How to analyze NPS data?")</li>
+                                <li>✅ Completely anonymized, aggregated data with NO identifiers</li>
+                                <li>✅ Template creation without any client specifics</li>
+                                <li>✅ Theoretical research questions and methodologies</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>NEVER Include:</strong></p>
+                            <ul>
+                                <li>❌ Client names, brands, or project identifiers</li>
+                                <li>❌ Any PII (names, emails, addresses, phone numbers)</li>
+                                <li>❌ Demographic combinations that could re-identify individuals</li>
+                                <li>❌ Proprietary methodologies or competitive intelligence</li>
+                                <li>❌ Actual survey responses, even if "anonymized"</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #10b981;">🏢 TIER 2: Enterprise AI Tools</h4>
+                            <p style="margin-top: 8px;"><strong>Allowed (with proper controls):</strong></p>
+                            <ul>
+                                <li>✅ Client data within security perimeter</li>
+                                <li>✅ Survey responses with organizational safeguards</li>
+                                <li>✅ Internal analysis and reporting</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>Requirements:</strong></p>
+                            <ul>
+                                <li>⚠️ Verify client data processing agreements permit AI use</li>
+                                <li>⚠️ Ensure proper audit trails and data governance</li>
+                                <li>⚠️ Follow organizational AI usage policies</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #8b5cf6;">🔬 TIER 3: Specialized Research Platforms</h4>
+                            <p style="margin-top: 8px;"><strong>Allowed (with verification):</strong></p>
+                            <ul>
+                                <li>✅ Full survey data within approved platforms</li>
+                                <li>✅ Real-time analysis during data collection</li>
+                                <li>✅ Advanced analytics with sensitive information</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>Verification Required:</strong></p>
+                            <ul>
+                                <li>⚠️ Platform compliance certifications (SOC 2, ISO 27001)</li>
+                                <li>⚠️ Data processing agreements in place</li>
+                                <li>⚠️ Client approval for specific tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Decision Framework: When to Use AI</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Step-by-Step Decision Tree</div>
+                        <ol>
+                            <li style="margin-bottom: 16px;">
+                                <strong>Does this task involve any client or sensitive data?</strong>
+                                <ul>
+                                    <li><strong>YES</strong> → Proceed to Question 2</li>
+                                    <li><strong>NO</strong> → Safe to use public AI tools (with normal quality checks)</li>
+                                </ul>
+                            </li>
+                            <li style="margin-bottom: 16px;">
+                                <strong>Can ALL data be completely and irreversibly anonymized?</strong>
+                                <ul>
+                                    <li><strong>YES</strong> → Anonymize thoroughly, then use appropriate tools</li>
+                                    <li><strong>NO</strong> → Must use enterprise/approved tools ONLY</li>
+                                    <li><strong>UNSURE</strong> → Treat as sensitive; use enterprise tools</li>
+                                </ul>
+                            </li>
+                            <li style="margin-bottom: 16px;">
+                                <strong>Does the client contract permit AI usage?</strong>
+                                <ul>
+                                    <li><strong>UNSURE</strong> → Check with legal/account manager BEFORE proceeding</li>
+                                    <li><strong>NO</strong> → Do NOT use AI; use traditional methods</li>
+                                    <li><strong>YES</strong> → Proceed with appropriate tier of tools</li>
+                                </ul>
+                            </li>
+                            <li style="margin-bottom: 16px;">
+                                <strong>Will AI outputs require validation?</strong>
+                                <ul>
+                                    <li><strong>ALWAYS YES</strong> → Plan for thorough human review and validation</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Is AI the best tool for this specific task?</strong>
+                                <ul>
+                                    <li>Consider: complexity, stakes, time available, quality requirements</li>
+                                    <li>Sometimes traditional methods are still the best choice</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Real-World Scenarios</h2>
+                    
+                    <div class="grid-2">
+                        <div class="success-box">
+                            <h4>✅ CORRECT: Safe AI Use</h4>
+                            <p><strong>Scenario:</strong> "I need to create a satisfaction survey for healthcare professionals."</p>
+                            <p style="margin-top: 12px;"><strong>Approach:</strong></p>
+                            <ul style="margin: 0;">
+                                <li>Use public AI to generate question templates</li>
+                                <li>No client data involved</li>
+                                <li>Review and customize outputs</li>
+                                <li>Validate with research standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>❌ INCORRECT: Security Violation</h4>
+                            <p><strong>Scenario:</strong> "Analyze these 500 responses from Kaiser Permanente's Q3 patient survey."</p>
+                            <p style="margin-top: 12px;"><strong>Why Wrong:</strong></p>
+                            <ul style="margin: 0;">
+                                <li>Client name revealed</li>
+                                <li>Actual survey data</li>
+                                <li>Potential PII in responses</li>
+                                <li>Could violate HIPAA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <h3 style="margin-bottom: 16px;">Knowledge Check</h3>
+                    <div class="quiz-question">Which of the following is SAFE to input into ChatGPT?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option">A) Survey responses from Client X about their new product launch</div>
+                        <div class="quiz-option">B) "How do I analyze customer satisfaction data for a retail client?"</div>
+                        <div class="quiz-option">C) Interview transcripts from our pharmaceutical study participants</div>
+                        <div class="quiz-option">D) Email addresses of survey respondents for follow-up</div>
+                    </div>
+                    <p style="margin-top: 12px; font-size: 0.9rem; color: #64748b;"><strong>Correct Answer:</strong> B - This is a generic methodology question with no client data or PII.</p>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="margin-bottom: 12px;">🎉 Module 1 Complete!</h3>
+                    <p style="margin-bottom: 16px;">You now understand the AI landscape for market research and critical security protocols. You're ready to move on to practical application with prompt engineering.</p>
+                    <button class="btn btn-success" onclick="completeModule('fundamentals')">Mark Complete & Earn 500 XP →</button>
+                </div>
+            `
+        },
+
+        'prompt-engineering': {
+            xp: 600,
+            content: `
+                <h1 class="content-title">💡 Module 2: Prompt Engineering Mastery</h1>
+        
+                <div class="highlight-box">
+                    <h3 style="margin-bottom: 12px;">Why Prompt Engineering Is Your Superpower</h3>
+                    <p>Prompt engineering is the difference between getting generic AI outputs and generating insights that rival those from senior consultants. Master this skill and you'll:</p>
+                    <ul>
+                        <li><strong>10x your productivity:</strong> Complete tasks in minutes that used to take hours</li>
+                        <li><strong>Improve quality:</strong> Generate professional-grade outputs consistently</li>
+                        <li><strong>Reduce rework:</strong> Get it right the first time (or second) instead of the tenth</li>
+                        <li><strong>Unlock capabilities:</strong> Do things you couldn't do before at any speed</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">The CLEAR Framework (Deep Dive)</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">C - CONTEXT (Set the Complete Stage)</div>
+                        <p>Context is the foundation. The more relevant context you provide, the better AI understands your specific situation and generates appropriate outputs.</p>
+                        
+                        <p style="margin-top: 20px;"><strong>The 7 Essential Context Elements:</strong></p>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">1. Industry & Market Dynamics</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Different industries have unique terminology, competitive dynamics, and customer behaviors.</p>
+                            <div class="code-block">
+        <strong>Weak:</strong> "I need survey questions for a tech company"
+
+        <strong>Strong:</strong> "B2B SaaS company in the healthcare IT sector, specifically electronic health 
+        records (EHR) for mid-size hospitals (200-500 beds). Market is mature with 3 dominant players 
+        controlling 70% market share. Our company is #4 with 8% share, positioned as the 'modern, 
+        cloud-native' alternative to legacy systems. Average deal size: $250K, sales cycle: 9-12 months."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">2. Business Objectives & Decisions at Stake</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Knowing what decision the research will inform shapes the entire approach.</p>
+                            <div class="code-block">
+        <strong>Weak:</strong> "We want to understand customer satisfaction
+
+        <strong>Strong:</strong> "Leadership is deciding whether to invest $2M in customer support expansion 
+        vs. $2M in product development. Renewal rates dropped from 92% to 87% over 6 months. We need 
+        to identify whether the decline is driven by product gaps, service issues, or external factors 
+        (economy, competition). This research will directly inform the H2 budget allocation decision 
+        at the board meeting on June 15th.
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">3. Target Audience (Deep Profiling)</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Demographics, psychographics, and behaviors all influence how to structure questions and analysis.</p>
+                            <div class="code-block">
+        <strong>Weak:</strong> "Our customers are healthcare professionals"
+
+        <strong>Strong:</strong> "Primary audience: Hospital IT Directors and CIOs
+        - Demographics: 85% male, ages 42-58, master's degree or higher
+        - Psychographics: Risk-averse, budget-conscious, politically savvy
+        - Technical level: Can read technical specs but not developers
+        - Key motivators: System uptime, regulatory compliance, minimizing staff complaints
+        - Pain points: Vendor lock-in concerns, integration headaches, change management
+        - Decision process: Influenced by clinical staff, final approval from CFO
+        - Time pressure: Very limited time for surveys (max 5-7 minutes)
+        - Communication style: Prefer data over anecdotes, bullet points over prose"
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">4. Historical Context & Baseline Data</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Understanding the trend line provides crucial perspective.</p>
+                            <div class="code-block">
+        <strong>Historical Performance:</strong>
+        - NPS: Q1 2023: 52 → Q2: 48 → Q3: 45 → Q4: 43 → Q1 2024: 42
+        - CSAT: Declined from 78% to 71% over same period
+        - Churn rate: Increased from 8% to 13% annually
+        - Support tickets: Up 35% YoY, average resolution time 3.2 days vs. 1.8 days last year
+        - Product releases: Major UI overhaul in Q3 2023 (received mixed feedback)
+        - Competition: Main competitor raised $50M, launched aggressive pricing campaign
+        - External factors: Industry-wide regulatory changes (HIPAA updates) in Q2 2023
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">5. Competitive Landscape</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Understanding where you stand vs. competitors shapes priorities.</p>
+                            <div class="code-block">
+        <strong>Competitive Context:</strong>
+        - Market Leader (Epic): NPS 61, 35% market share, enterprise focus, expensive, slow to innovate
+        - Strong #2 (Cerner): NPS 58, 28% market share, broad feature set, implementation challenges
+        - Growing #3 (Meditech): NPS 55, 15% market share, small hospital specialists
+        - Our Position: NPS 42, 8% market share, modern UI, cloud-native, fastest implementation
+        - Key Differentiators: 3-month implementation vs. 12-18 months for competitors, $100K less per year
+        - Competitive Weaknesses: Fewer integrations, smaller partner ecosystem, less "proven" in market
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">6. Constraints & Requirements</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Real-world limitations shape what's actually possible.</p>
+                            <div class="code-block">
+        <strong>Project Constraints:</strong>
+        - Budget: $15K total for research (including incentives)
+        - Timeline: Need final report by June 1 (6 weeks from now)
+        - Sample size: Access to 1,200 customers, targeting 400 responses (33% response rate)
+        - Incentive: $25 Amazon gift card per completion
+        - Survey length: MUST be under 7 minutes (hard stop - respondents drop off sharply after that)
+        - Technical: Must work on mobile devices (60% of users complete surveys on mobile)
+        - Regulatory: HIPAA compliant survey platform required, no PII collection without explicit consent
+        - Approval: All questions must be reviewed by legal (add 1 week to timeline)
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">7. Existing Hypotheses & Theories</h4>
+                            <p style="margin-top: 8px;"><strong>Why it matters:</strong> Test specific theories rather than fishing expeditions.</p>
+                            <div class="code-block">
+        <strong>Working Hypotheses:</strong>
+
+        H1: The Q3 2023 UI overhaul caused satisfaction decline
+        - Evidence for: Timing aligns with NPS drop, support tickets mention "confusing new interface"
+        - Evidence against: Competitor launched aggressive campaign at same time
+
+        H2: Implementation speed advantage is eroding as we scale
+        - Evidence for: Recent implementations taking 4-5 months vs. 3 months previously
+        - Evidence against: Still much faster than competitors
+
+        H3: Integration limitations are becoming deal-breakers
+        - Evidence for: Lost 3 deals in Q1 specifically citing integration requirements
+        - Evidence against: Integration roadmap is robust, releases planned Q2-Q3
+
+        H4: Customer support responsiveness is the primary driver
+        - Evidence for: Support ticket volume and resolution times correlating with satisfaction decline
+        - Evidence against: Customer success team size grew 40%, so capacity isn't the issue
+                            </div>
+                        </div>
+
+                        <div class="success-box" style="margin-top: 20px;">
+                            <h4>Complete Context Example</h4>
+                            <div class="code-block">
+        <strong>COMPREHENSIVE CONTEXT STATEMENT:</strong>
+
+        You are designing a customer satisfaction survey for CloudCare EHR, a B2B SaaS company providing 
+        electronic health records to mid-size hospitals (200-500 beds). We're #4 in market share (8%) 
+        competing against three larger players with a "modern, cloud-native" positioning.
+
+        <strong>Business Problem:</strong> Renewal rates dropped from 92% to 87% over 6 months. Leadership needs to 
+        decide whether to invest $2M in customer support expansion or product development. Decision at 
+        board meeting June 15th.
+
+        <strong>Target Audience:</strong> Hospital IT Directors/CIOs (85% male, ages 42-58, master's+, risk-averse, 
+        budget-conscious, very limited time). They care most about uptime, compliance, and minimizing 
+        staff complaints.
+
+        <strong>Historical Context:</strong> NPS declined from 52 to 42 over 12 months. Major UI overhaul Q3 2023 
+        received mixed feedback. Support tickets up 35% YoY, resolution time increased from 1.8 to 
+        3.2 days. Main competitor launched aggressive pricing campaign.
+
+        <strong>Competitive Position:</strong> Fastest implementation (3 months vs. 12-18 for competitors), $100K less 
+        per year, but fewer integrations and smaller partner ecosystem.
+
+        <strong>Project Constraints:</strong> $15K budget, 6-week timeline, need 400 responses from 1,200 customers, 
+        survey MUST complete in under 7 minutes, must work on mobile (60% of responses), HIPAA compliant 
+        platform required.
+
+        <strong>Key Hypotheses to Test:</strong>
+        1. UI overhaul caused satisfaction decline
+        2. Implementation speed advantage eroding as we scale
+        3. Integration limitations becoming deal-breakers  
+        4. Support responsiveness is primary driver of decline
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">L - LENGTH & FORMAT (Precision Specification)</div>
+                        <p>Vague requests get vague outputs. Precise specifications get professional results.</p>
+                        
+                        <p style="margin-top: 20px;"><strong>The 6 Dimensions of Output Specification:</strong></p>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">1. Quantity Specification</h4>
+                            <div class="grid-2">
+                                <div class="warning-box">
+                                    <strong>Vague:</strong>
+                                    <p>"Generate some survey questions"</p>
+                                    <p>"Find the main themes"</p>
+                                    <p>"Give me recommendations"</p>
+                                </div>
+                                <div class="success-box">
+                                    <strong>Precise:</strong>
+                                    <p>"Generate exactly 15 questions"</p>
+                                    <p>"Identify 6-8 primary themes (no more, no less)"</p>
+                                    <p>"Provide 3-5 specific, actionable recommendations"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">2. Mix & Distribution Requirements</h4>
+                            <div class="code-block">
+        <strong>Survey Question Mix Example:</strong>
+
+        Generate 15 questions with this EXACT distribution:
+        - 1 screening question (app usage in past 30 days: yes/no)
+        - 1 NPS question (standard 0-10 format with follow-up)
+        - 8 satisfaction questions (7-point Likert: very dissatisfied to very satisfied)
+        → 3 questions about product features
+        → 3 questions about customer support  
+        → 2 questions about implementation/onboarding
+        - 3 multiple choice questions (5-6 mutually exclusive options each)
+        → 1 about most-used feature
+        → 1 about biggest pain point
+        → 1 about competitive consideration
+        - 2 open-ended questions (placed strategically: one mid-survey, one at end)
+        → "What is ONE thing we should improve?" (mid-survey)
+        → "Any additional feedback?" (end)
+
+        Total: 15 questions, target completion time 5.5 minutes (test at 150 wpm reading speed)
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">3. Structural Format Requirements</h4>
+                            <p>Different tasks require different structures. Be specific about the output format.</p>
+                            
+                            <div class="code-block">
+        <strong>For Survey Questions:</strong>
+        Format each question as:
+        Q[number]. [Question text]
+        Scale: [Response options with labels]
+        Logic: [Skip logic if applicable]
+        Note: [Rationale for including this question]
+
+        Example:
+        Q7. How satisfied are you with the speed of our customer support responses?
+        Scale: 1-Very Dissatisfied, 2-Dissatisfied, 3-Somewhat Dissatisfied, 4-Neutral, 5-Somewhat Satisfied, 6-Satisfied, 7-Very Satisfied
+        Logic: If Q7 ≤ 3 (dissatisfied), skip to Q8 (support pain points). If Q7 ≥ 5, skip to Q10 (feature satisfaction)
+        Note: Tests H4 (support responsiveness driving satisfaction decline). Response time increased from 1.8 to 3.2 days - this should surface whether it's impacting satisfaction.
+                            </div>
+
+                            <div class="code-block">
+        <strong>For Analysis Outputs:</strong>
+        Format each insight as:
+
+        <strong>THEME [#]:</strong> [Descriptive name] ([prevalence], [priority level])
+
+        <strong>EVIDENCE:</strong>
+        - [Quantitative data point]
+        - [Supporting quote 1 - respondent ID]
+        - [Supporting quote 2 - respondent ID]
+        - [Statistical correlation if relevant]
+
+        <strong>BUSINESS IMPACT:</strong>
+        - [Specific impact on revenue/churn/satisfaction]
+        - [Comparison to baseline or benchmark]
+        - [Estimated financial impact if possible]
+
+        <strong>ROOT CAUSE ANALYSIS:</strong>
+        - [Why this is happening - not just what]
+        - [Contributing factors]
+
+        <strong>RECOMMENDATION:</strong>
+        - [Specific action with owner]
+        - [Expected outcome with metrics]
+        - [Implementation timeline]
+        - [Quick wins vs. longer-term changes]
+
+        <strong>CONFIDENCE LEVEL:</strong> [High/Medium/Low based on data strength]
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">4. Length & Depth Specification</h4>
+                            <div class="code-block">
+        <strong>For Executive Summaries:</strong>
+        - Overall length: 1 page maximum (400-500 words)
+        - Opening hook: 1-2 sentences stating the key finding
+        - Key findings: 3-4 bullet points (1-2 sentences each)
+        - Each finding must include: metric, change from baseline, business implication
+        - Recommendations: 3-5 actions in priority order (1 sentence each)
+        - Avoid: methodology details, caveats, long explanations
+
+        <strong>For Detailed Analysis:</strong>
+        - Overall length: 8-12 pages
+        - Executive summary: 1 page (see above)
+        - Methodology: 1 page (sample, timing, response rate, limitations)
+        - Findings: 5-8 pages organized by theme, each theme gets 3/4 to 1 page
+        - Appendix: Full question list, detailed crosstabs, verbatims
+
+        <strong>For Quick Insights:</strong>
+        - Format: Slack/email-friendly
+        - Length per insight: 2-3 sentences maximum
+        - Structure: Finding → Evidence → So What
+        - Example: "Response time is our #1 satisfaction driver. 67% of detractors cited slow support (avg 3.2 days vs 1.8 days last year). Every additional day correlates with -5 NPS points. Recommend: Implement 24-hour SLA for P1 tickets."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">5. Style & Tone Specification</h4>
+                            <div class="code-block">
+        <strong>For Different Audiences:</strong>
+
+        <strong>C-Suite Executives:</strong>
+        - Tone: Decisive, confident, action-oriented
+        - Language: Business outcomes, revenue impact, strategic implications
+        - Avoid: Hedging, uncertainty, academic language
+        - Example: "Invest $500K in support expansion. ROI positive within 6 months through churn reduction."
+
+        <strong>Product Teams:</strong>
+        - Tone: Specific, technical, feature-focused
+        - Language: User pain points, workflow issues, feature requests
+        - Include: Verbatim quotes, specific scenarios, priority rankings
+        - Example: "Users struggle with the export function when datasets exceed 10K rows. This creates a workaround of manual data extraction, adding 2-3 hours per week. Priority: High (affects 45% of power users)."
+
+        <strong>Marketing/Sales:</strong>
+        - Tone: Customer-centric, emotional, benefit-focused
+        - Language: Customer feelings, pain points, desires, competitive positioning
+        - Include: Persona insights, messaging opportunities, competitive advantages
+        - Example: "Customers love our 3-month implementation vs. 12+ months for Epic. They describe feeling 'relieved' and 'surprised' by the speed. Use this as a core differentiator in all messaging."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">6. Technical Requirements</h4>
+                            <div class="code-block">
+        <strong>For Survey Questions:</strong>
+        - Reading level: Flesch-Kincaid grade 8 maximum (test each question)
+        - Character length: Max 60 characters per question for mobile optimization
+        - Screen size: Design for iPhone SE (smallest common screen) - no horizontal scrolling
+        - Font size: Minimum 14pt for readability
+        - Progress indicator: Show percentage complete after each screen
+        - Estimated time: Display "About X minutes remaining" updated dynamically
+
+        <strong>For Data Analysis:</strong>
+        - Statistical significance: Report p-values for all comparisons
+        - Sample sizes: Always report n for each segment
+        - Confidence intervals: 95% CI for all key metrics
+        - Weighting: Specify if data is weighted and methodology
+        - Missing data: Report percentage of "don't know" / "prefer not to answer"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">E - EXAMPLES (Show Perfect Outputs)</div>
+                        <p>Examples are the fastest way to teach AI exactly what you want. One good example is worth a thousand words of description.</p>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Question Formatting Examples</h4>
+                            <div class="code-block">
+        <strong>Example of Likert Scale Question:</strong>
+
+        Q4. How satisfied are you with the speed of our customer support team's responses to your tickets?
+
+        Scale: 1 (Very Dissatisfied) — 2 (Dissatisfied) — 3 (Somewhat Dissatisfied) — 4 (Neutral) — 5 (Somewhat Satisfied) — 6 (Satisfied) — 7 (Very Satisfied)
+
+        Logic: If response ≤ 3, display Q4a: "What is the primary reason for your dissatisfaction?"
+
+        Why this question: Tests hypothesis that increased response times (1.8 to 3.2 days) are driving satisfaction decline. Critical priority - correlates with renewal decisions.
+
+        ---
+
+        <strong>Example of Multiple Choice Question:</strong>
+
+        Q8. Which aspect of CloudCare EHR do you find most valuable?
+
+        Choose one:
+        a) Fast implementation timeline (3 months vs. industry average of 12+ months)
+        b) Modern, intuitive user interface  
+        c) Cloud-based access from any device
+        d) Integration with existing hospital systems
+        e) Responsive customer support
+        f) Cost savings compared to competitors
+        g) Other (please specify): __________
+
+        Why this question: Identifies our strongest competitive advantage from customer perspective. Will inform positioning and messaging strategy.
+
+        ---
+
+        <strong>Example of Open-Ended Question:</strong>
+
+        Q14. If you could change ONE thing about CloudCare EHR to make it better serve your needs, what would it be?
+
+        [Text box: 500 character limit, approximately 75 words]
+
+        Placeholder text: "Please be as specific as possible. Examples: 'Add integration with X system', 'Improve Y workflow', 'Change Z feature to work like...'"
+
+        Why this question: Captures specific, actionable improvement requests. Analysis approach: code for themes, prioritize by frequency and feasibility.
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Analysis Output Examples</h4>
+                            <div class="code-block">
+        <strong>THEME 1:</strong> Customer Support Response Time (Mentioned by 347/400 respondents, 87%, CRITICAL priority)
+
+        <strong>EVIDENCE:</strong>
+        - Average satisfaction with support response time: 3.2/7 (down from 5.8/7 six months ago)
+        - "It takes 3-4 days to get a response on critical issues. That's unacceptable." - Respondent #127 (Large Hospital, 3-year customer)
+        - "We've had tickets sit for a week with no updates. I have to call my account manager just to get status." - Respondent #201 (Mid-size Hospital, 2-year customer)
+        - 89% of detractors (NPS 0-6) cited slow support vs. only 12% of promoters (NPS 9-10)
+        - Correlation analysis: Each additional day in average response time = -5.3 NPS points (r=-0.73, p<0.001)
+
+        <strong>BUSINESS IMPACT:</strong>
+        - Directly driving renewal decline: customers citing support as primary reason for non-renewal increased from 8% to 31%
+        - Estimated revenue at risk: $2.4M annually if current trend continues
+        - Competitive vulnerability: Epic's average response time is 18 hours - we've gone from beating them to being 4x slower
+        - Churn predictor: Customers with 3+ slow support experiences have 67% renewal rate vs. 94% for those with fast support
+
+        <strong>ROOT CAUSE ANALYSIS:</strong>
+        - Customer base grew 40% but support team only grew 15% - capacity insufficient
+        - New tier-2 support hires are undertrained, leading to ticket reassignments and delays
+        - Ticket prioritization system not working - non-urgent tickets getting same treatment as critical
+        - Knowledge base outdated after Q3 UI overhaul - support can't find answers quickly
+
+        <strong>RECOMMENDATIONS:</strong>
+
+        <strong>Immediate (0-30 days):</strong>
+        1. Implement tiered SLA system: P1 (critical) = 2 hours, P2 (high) = 8 hours, P3 (normal) = 24 hours, P4 (low) = 48 hours
+        Owner: VP Customer Success | Investment: $0 (process change)
+        2. Hire 3 experienced support engineers (not junior) to handle tier-2 escalations
+        Owner: VP Customer Success | Investment: $450K annually | Expected impact: -20% average response time
+        3. Update knowledge base with Q3 UI changes and new common issues
+        Owner: Support Manager + Product Marketing | Investment: 40 hours | Completion: Week of May 15
+
+        <strong>Short-term (30-90 days):</strong>
+        4. Launch comprehensive tier-2 training program with certification requirement
+        Owner: Support Manager | Investment: $75K | Expected impact: -30% ticket reassignment rate
+        5. Implement customer-facing ticket status dashboard for transparency
+        Owner: Engineering | Investment: 2 sprint cycles | Expected impact: -50% "status check" calls
+
+        <strong>Expected Outcomes:</strong>
+        - Average response time: 3.2 days → 18 hours (80% improvement) within 90 days
+        - NPS improvement: +12 points (from 42 to 54) based on correlation analysis
+        - Churn reduction: 13% → 9% (estimated $1.8M revenue retention)
+        - ROI: Positive within 6 months (investment $525K, retention benefit $1.8M)
+
+        <strong>CONFIDENCE LEVEL:</strong> HIGH
+        - Large sample size (347/400 = 87% of respondents)
+        - Strong statistical correlations (r=-0.73, p<0.001)
+        - Triangulated with renewal data, support ticket metrics, and competitor benchmarks
+        - Consistent across all customer segments (no contradictory data)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">A - AUDIENCE (Know Your Reader Deeply)</div>
+                        <p>Different audiences need radically different approaches. A report for the CEO should look nothing like a report for a product manager.</p>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Audience Profiling Framework</h4>
+                            <div class="code-block">
+        <strong>For each key stakeholder, specify:</strong>
+
+        <strong>1. ROLE & DECISION AUTHORITY</strong>
+        - What decision are they making with this research?
+        - Who else influences their decision?
+        - What happens if they decide wrong?
+
+        <strong>2. KNOWLEDGE & EXPERTISE</strong>
+        - Technical level (1-10 scale)
+        - Research methodology knowledge
+        - Industry/domain expertise
+        - Statistical literacy
+
+        <strong>3. TIME & ATTENTION</strong>
+        - How much time will they spend with your output? (be realistic)
+        - When will they review it? (rushed morning vs. thoughtful afternoon)
+        - What format do they prefer? (slides, memo, verbal briefing)
+
+        <strong>4. INFORMATION PREFERENCES</strong>
+        - Data vs. stories
+        - Details vs. summaries
+        - Options vs. recommendations
+        - Visuals vs. text
+
+        <strong>5. PSYCHOLOGICAL FACTORS</strong>
+        - Risk tolerance
+        - Decision style (fast vs. deliberate)
+        - Confirmation bias concerns
+        - Political considerations
+
+        <strong>6. SUCCESS CRITERIA</strong>
+        - What does "helpful research" look like to them?
+        - What would make them ignore your findings?
+        - What questions must be answered?
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Audience-Specific Examples</h4>
+                            
+                            <div class="code-block">
+        <strong>AUDIENCE: CEO (Sarah Chen)</strong>
+
+        Profile:
+        - Deciding: Whether to invest $2M in support expansion or product development
+        - Time available: 10 minutes before board meeting
+        - Technical level: 3/10 (MBA background, not technical)
+        - Preferences: Bottom-line first, data-driven, hates uncertainty
+        - Risk tolerance: Moderate but consequences of wrong decision are severe (board scrutiny)
+        - Decision style: Fast, confident, wants clear recommendation not options
+
+        Format accordingly:
+        - Lead with recommendation in first sentence
+        - Support with 3-4 key data points (revenue impact, customer impact, competitive impact)
+        - One page maximum
+        - No methodology details
+        - No caveats or limitations (save for appendix)
+        - Bold the key numbers
+        - Use language like "we recommend" not "you could consider"
+
+        Example opening:
+        "Invest $2M in customer support expansion. This will generate $5M in retention value within 12 months by reducing churn from 13% to 9%. Support response time is the #1 driver of customer dissatisfaction (87% of respondents) and directly correlates with renewals. The product development investment can wait - we're losing customers not because of missing features but because we're not supporting the features we have."
+
+        ---
+
+        <strong>AUDIENCE: VP Product (Marcus Rodriguez)</strong>
+
+        Profile:
+        - Deciding: What to build in next quarter's roadmap
+        - Time available: 30-45 minutes for deep review
+        - Technical level: 9/10 (former engineer, highly analytical)
+        - Preferences: Detailed data, customer quotes, wants to understand methodology
+        - Risk tolerance: High (comfortable with ambiguity, used to iterating)
+        - Decision style: Deliberate, wants to see the data himself
+
+        Format accordingly:
+        - Start with methodology so he can assess quality
+        - Include detailed tables with sample sizes, confidence intervals
+        - Provide extensive verbatim quotes
+        - Organize by feature/function area
+        - Include edge cases and outliers (don't hide complexity)
+        - Offer raw data access for his own analysis
+        - Present findings, let him draw conclusions
+
+        Example opening:
+        "Methodology: 400 responses from stratified random sample (response rate 33%, within target), fielded March 1-15, 2024. Confidence intervals ±4.9% at 95% confidence level. Full sampling plan and weighting approach in Appendix A. Key finding: Integration limitations mentioned by 34% of respondents, but only 8% rate it as top-3 priority issue. Detailed breakdown by integration type, customer size, and industry vertical below. Note: Small sample size (n=32) for financial services segment limits ability to draw firm conclusions for that segment."
+
+        ---
+
+        <strong>AUDIENCE: Board of Directors</strong>
+
+        Profile:
+        - Deciding: Whether management is making sound strategic choices
+        - Time available: 5 minutes (report pre-read), 10 minutes (verbal presentation)
+        - Technical level: 2/10 (finance/business background, not operational detail)
+        - Preferences: Strategic implications, competitive positioning, risk assessment
+        - Risk tolerance: Very risk-averse (fiduciary duty)
+        - Decision style: Evaluative (assessing management, not making operational decisions)
+
+        Format accordingly:
+        - Frame everything in strategic/competitive terms
+        - Compare to industry benchmarks constantly
+        - Highlight risks and mitigation strategies
+        - Show you've considered alternative explanations
+        - Demonstrate customer voice matters to company
+        - Provide confidence in management's judgment
+
+        Example opening:
+        "Customer research reveals a fixable problem. Our NPS of 42 trails industry leader (61) primarily due to support response times (3.2 days vs. 18 hours). This is a capacity issue, not a product issue - we grew customers 40% but support only 15%. Management recommends $2M support investment to reduce churn from 13% to 9%, protecting $1.8M in annual recurring revenue. ROI positive within 6 months. Risk if we don't act: further market share losses to competitors who are investing heavily in customer success. This is a standard scaling challenge that can be addressed with disciplined execution."
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">R - REQUEST (Precision Action Verbs)</div>
+                        <p>The request is your command to AI. Use clear, specific action verbs that leave no room for interpretation.</p>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Action Verb Dictionary for Research</h4>
+                            <div class="code-block">
+        <strong>GENERATE</strong> - Create new content from scratch
+        Use for: questionnaires, personas, hypotheses, frameworks
+        Example: "GENERATE 15 survey questions that measure satisfaction with customer support response times, technical expertise, and communication clarity"
+
+        <strong>ANALYZE</strong> - Examine patterns, relationships, correlations
+        Use for: finding insights in data, identifying trends
+        Example: "ANALYZE 500 open-ended responses to identify patterns by customer segment, correlate themes with NPS scores, and surface unexpected findings"
+
+        <strong>IDENTIFY</strong> - Find and name specific elements
+        Use for: themes, segments, opportunities, gaps
+        Example: "IDENTIFY 6-8 primary themes in the verbatim comments, focusing on root causes not just symptoms"
+
+        <strong>COMPARE</strong> - Contrast two or more things systematically
+        Use for: time periods, competitors, segments, options
+        Example: "COMPARE satisfaction levels between customers onboarded before vs. after the Q3 UI change, controlling for customer size and industry"
+
+        <strong>PRIORITIZE</strong> - Rank by importance/impact/urgency
+        Use for: features, issues, recommendations, segments
+        Example: "PRIORITIZE the identified themes by both frequency AND business impact (revenue risk), not just by how often they were mentioned"
+
+        <strong>SYNTHESIZE</strong> - Combine multiple sources into coherent whole
+        Use for: multiple data sources, contradictory findings
+        Example: "SYNTHESIZE findings from this survey with Q4 2023 NPS data and support ticket trends to form unified perspective on customer satisfaction drivers"
+
+        <strong>RECOMMEND</strong> - Provide specific, actionable next steps
+        Use for: action plans, interventions, strategies
+        Example: "RECOMMEND 3-5 specific actions with clear owners, timelines, expected outcomes, and success metrics"
+
+        <strong>TRANSLATE</strong> - Convert from one form/language to another
+        Use for: technical to business language, raw data to insights
+        Example: "TRANSLATE these statistical findings into executive-friendly language with clear business implications"
+
+        <strong>VALIDATE</strong> - Check accuracy, logic, quality
+        Use for: checking survey questions, reviewing analysis
+        Example: "VALIDATE these 15 survey questions for bias, double-barreled questions, leading language, and mobile readability"
+
+        <strong>SEGMENT</strong> - Divide into meaningful groups
+        Use for: customer clustering, typologies
+        Example: "SEGMENT customers into 4-6 distinct groups based on satisfaction patterns, usage behaviors, and stated needs"
+
+        <strong>QUANTIFY</strong> - Put numbers to qualitative findings
+        Use for: estimating impact, sizing opportunities
+        Example: "QUANTIFY the potential revenue impact of addressing each of the top 5 themes based on churn correlation data"
+
+        <strong>FORECAST</strong> - Predict future trends or outcomes
+        Use for: projections, scenario planning
+        Example: "FORECAST what NPS will be in Q2 and Q3 if current trends continue vs. if we implement recommended support improvements"
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Multi-Step Request Structures</h4>
+                            <p>Complex tasks need multi-step requests with clear sequencing.</p>
+                            <div class="code-block">
+        <strong>Structure: Sequential Steps</strong>
+
+        "Complete this analysis in 5 steps:
+
+        STEP 1: ANALYZE the 400 open-ended responses to identify major themes
+        Output: 6-8 theme names with brief definitions
+
+        STEP 2: QUANTIFY each theme by counting mentions and calculating % of total responses
+        Output: Table with theme name, count, percentage, sorted by frequency
+
+        STEP 3: CORRELATE each theme with NPS scores to identify satisfaction drivers
+        Output: Correlation coefficients and p-values for each theme
+
+        STEP 4: COMPARE theme prevalence across customer segments (size, industry, tenure)
+        Output: Crosstabs showing whether themes vary by segment
+
+        STEP 5: PRIORITIZE themes using 2x2 matrix of frequency (x-axis) vs. impact (y-axis)
+        Output: Visual prioritization matrix with themes plotted, recommendations for high-frequency + high-impact themes"
+
+        ---
+
+        <strong>Structure: Parallel Processing</strong>
+
+        "Complete three separate analyses simultaneously:
+
+        ANALYSIS A - QUANTITATIVE: 
+        Process the Likert scale responses to identify top satisfaction drivers using correlation analysis. Report key driver analysis results.
+
+        ANALYSIS B - QUALITATIVE:
+        Code the open-ended responses to identify themes. Provide theme definitions, frequencies, and representative quotes.
+
+        ANALYSIS C - COMPETITIVE:
+        Compare our performance metrics to the three main competitors on the dimensions customers rated. Create competitive positioning map.
+
+        THEN: SYNTHESIZE findings from A, B, and C into unified perspective on where we're winning and losing vs. competition."
+
+        ---
+
+        <strong>Structure: Conditional Logic</strong>
+
+        "ANALYZE customer satisfaction data with these conditional steps:
+
+        IF overall satisfaction > 7 out of 10 THEN:
+        Focus on identifying what's working well (strengths to leverage)
+        Segment promoters to understand characteristics of happiest customers
+        Analyze competitive advantages
+        
+        ELSE IF satisfaction between 5-7 THEN:
+        Focus on identifying improvement opportunities (low-hanging fruit)
+        Prioritize by quick wins vs. long-term investments
+        Look for specific pain points to address
+
+        ELSE (satisfaction < 5) THEN:
+        Focus on crisis management (what's broken?)
+        Identify retention risk factors
+        Prioritize urgent interventions to stop churn
+
+        ALWAYS: Compare to Q4 2023 baseline to understand direction of trend"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Advanced Prompting Techniques</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">1. Chain-of-Thought Prompting</div>
+                        <p>Force AI to show its reasoning process, catching errors and improving quality.</p>
+                        <div class="code-block">
+        <strong>Basic Chain-of-Thought:</strong>
+
+        "Before providing your final analysis, work through this step-by-step and show your thinking:
+
+        STEP 1: List the 10 most frequently mentioned topics
+        STEP 2: For each topic, calculate sentiment distribution (% positive, negative, neutral)
+        STEP 3: Identify which topics correlate with overall satisfaction (r values)
+        STEP 4: Check for patterns by segment - do different customer types mention different things?
+        STEP 5: Synthesize into top 5 actionable insights with supporting evidence
+
+        For each step, show your work before moving to the next step."
+
+        ---
+
+        <strong>Advanced Chain-of-Thought with Critique:</strong>
+
+        "PHASE 1 - Initial Analysis:
+        Analyze the data and generate your preliminary findings
+
+        PHASE 2 - Self-Critique:
+        Now critique your Phase 1 analysis:
+        - What assumptions did you make?
+        - What alternative explanations exist?
+        - What evidence contradicts your findings?
+        - What are you uncertain about?
+        - Where might you be wrong?
+
+        PHASE 3 - Revised Analysis:
+        Based on your self-critique, revise and strengthen your analysis. Change conclusions if warranted."
+
+        ---
+
+        <strong>Chain-of-Thought with Hypothesis Testing:</strong>
+
+        "We have 4 competing hypotheses about why NPS declined:
+        H1: UI overhaul caused confusion
+        H2: Support response times got worse
+        H3: Competition increased
+        H4: Implementation times increased
+
+        For EACH hypothesis:
+        STEP 1: What evidence would support this hypothesis?
+        STEP 2: What evidence would refute this hypothesis?
+        STEP 3: What does our data show?
+        STEP 4: How confident are you this hypothesis explains the decline? (%)
+        STEP 5: What other data would you need to be more certain?
+
+        THEN: Rank hypotheses by likelihood and explain your reasoning."
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">2. Role-Based Prompting (Expert Personas)</div>
+                        <p>Assign AI a specific expert role with relevant background and perspective.</p>
+                        <div class="code-block">
+        <strong>Senior Research Consultant Persona:</strong>
+
+        "You are Dr. Sarah Chen, a senior market research consultant with 20 years of experience in B2B 
+        technology research. Your PhD is in organizational psychology, and you specialize in customer 
+        satisfaction studies for enterprise software companies.
+
+        Your expertise includes:
+        - Advanced statistical analysis (regression, factor analysis, SEM)
+        - Customer journey mapping and experience design
+        - NPS methodology and driver analysis
+        - B2B buyer behavior and decision-making processes
+        - Technology adoption and change management
+
+        Your style:
+        - Data-driven but not dogmatic - you know when quantitative data misses important nuances
+        - Practical focus on actionable recommendations over academic rigor
+        - Direct communicator who doesn't sugarcoat findings
+        - Always considers business context and constraints
+        - Known for finding insights others miss by asking unexpected questions
+
+        Your client is the CMO of a struggling SaaS company. She's skeptical of research ('more surveys 
+        won't fix our problems') and needs clear, data-driven proof that you've found something real 
+        and actionable.
+
+        Given this role and context, analyze the survey data and provide your expert perspective..."
+
+        ---
+
+        <strong>Skeptical Customer Persona (for Survey Testing):</strong>
+
+        "You are James Martinez, a 52-year-old Hospital IT Director at a 400-bed regional hospital. You've 
+        been in healthcare IT for 25 years and have seen every technology trend come and go.
+
+        Your personality:
+        - Deeply skeptical of vendor promises and marketing speak
+        - Extremely busy (60+ hour weeks) and protective of your time
+        - Detail-oriented and risk-averse (patient data is life-or-death)
+        - Frustrated by poorly designed software that creates more work
+        - Tired of long, poorly written surveys
+
+        Your current situation:
+        - Your hospital uses CloudCare EHR (evaluating whether to renew)
+        - You've had some support issues but generally satisfied
+        - You received a survey request and are deciding whether to complete it
+
+        I'm going to show you survey questions one at a time. For each question:
+        1. Will you answer it honestly, skip it, or abandon the survey?
+        2. What's your immediate reaction/feeling?
+        3. What are you thinking as you read it?
+        4. Is anything confusing or unclear?
+        5. How long did it take you to process the question?
+
+        Be brutally honest - this is how you actually think, not how you're 'supposed' to respond."
+
+        ---
+
+        <strong>Competitive Intelligence Analyst Persona:</strong>
+
+        "You are Alex Rivera, a competitive intelligence analyst who has tracked the healthcare IT market 
+        for 10 years. You've analyzed hundreds of customer satisfaction surveys, competitive win/loss 
+        interviews, and market research reports.
+
+        You know:
+        - How all major players (Epic, Cerner, Meditech, etc.) position themselves
+        - Common satisfaction patterns across the industry
+        - What drives customer decisions between competitors
+        - Industry benchmarks for NPS, satisfaction, retention
+        - Emerging trends and market shifts
+
+        When you analyze customer feedback, you instinctively:
+        - Compare to industry norms ('Is this unique to us or universal?')
+        - Identify competitive vulnerabilities and opportunities
+        - Spot positioning gaps in the market
+        - Think about win/loss drivers and competitive messaging
+
+        Given this expertise, analyze the survey data with a focus on competitive implications..."
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">3. Constraint-Based Prompting</div>
+                        <p>Define explicit requirements and forbidden elements to ensure quality and compliance.</p>
+                        <div class="code-block">
+        <strong>Survey Design Constraints:</strong>
+
+        <strong>MANDATORY REQUIREMENTS ✓</strong>
+        - All questions MUST be neutral with no leading language
+        - Reading level MUST be 8th grade or below (Flesch-Kincaid score ≥ 60)
+        - Questions MUST work on mobile screens (max 60 characters)
+        - Survey MUST include standard NPS question (exact format)
+        - Total completion time MUST be 5-7 minutes (test at 150 wpm + 3 sec per question)
+        - Response options MUST be mutually exclusive and exhaustive
+        - MUST include "Prefer not to answer" option for demographic questions
+        - MUST avoid double-barreled questions (one topic per question)
+        - Demographic questions MUST appear at END only (not beginning)
+        - MUST pass WCAG 2.1 AA accessibility standards
+
+        <strong>STRICTLY FORBIDDEN ✗</strong>
+        - NO leading language ("Don't you think...", "Wouldn't you agree...")
+        - NO biased modifiers ("excellent service", "poor quality", "innovative solution")
+        - NO industry jargon without explanation
+        - NO acronyms unless absolutely necessary (and define on first use)
+        - NO questions combining multiple concepts
+        - NO loaded terms that assume facts not in evidence
+        - NO questions requiring calculation or lookup
+        - NO questions with overlapping response options
+        - NO more than 3 open-ended questions (respondent fatigue)
+        - NO matrix questions on mobile (too difficult to complete)
+
+        <strong>QUALITY STANDARDS ✓✓</strong>
+        - 90%+ of questions should be closed-ended (Likert/multiple choice)
+        - Response scales should be balanced (equal positive and negative options)
+        - Question order should follow funnel approach (general to specific)
+        - Include at least 2 attention check questions (e.g., "Select 'Agree' for this question")
+        - Randomize response order where possible to reduce order bias
+        - Include skip logic to reduce irrelevant questions
+        - Provide clear instructions and examples where needed
+
+        <strong>VALIDATION STEPS ✓✓✓</strong>
+        After generating questions:
+        1. Check EACH question for reading level
+        2. Check EACH question for character count
+        3. Check EACH question for bias
+        4. Verify total estimated time
+        5. Confirm all constraints are met
+        6. Flag any questions you're uncertain about
+
+        Generate survey following ALL requirements above. If any requirement cannot be met, explain why."
+
+        ---
+
+        <strong>Analysis Quality Constraints:</strong>
+
+        <strong>STATISTICAL RIGOR REQUIREMENTS ✓</strong>
+        - MUST report sample size (n) for every segment/subgroup
+        - MUST report confidence intervals for key metrics (95% CI)
+        - MUST conduct significance testing for all comparisons (report p-values)
+        - MUST account for multiple comparison problem if running many tests
+        - MUST report effect sizes, not just statistical significance
+        - MUST check and report any data quality issues (missing data, outliers, etc.)
+        - MUST weight data if sample doesn't match population (and explain weighting)
+
+        <strong>INTERPRETATION STANDARDS ✓✓</strong>
+        - DO NOT confuse correlation with causation (be explicit about limitations)
+        - DO NOT overinterpret small sample sizes (flag when n < 30)
+        - DO NOT ignore contradictory evidence (present alternative explanations)
+        - DO NOT present single data point as definitive (triangulate with other data)
+        - DO NOT make claims beyond what data supports (appropriate confidence level)
+
+        <strong>REPORTING STANDARDS ✓✓✓</strong>
+        - Present findings, not just data (so what?)
+        - Organize by business question, not by survey question
+        - Lead with most important finding (don't bury the lede)
+        - Support every claim with specific evidence
+        - Provide actionable recommendations, not just insights
+        - Be transparent about limitations and uncertainties"
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">4. Iterative Refinement Strategies</div>
+                        <p>Professional work requires iteration. Use progressive prompts to improve outputs.</p>
+                        <div class="code-block">
+        <strong>The 5-Round Refinement Process:</strong>
+
+        <strong>ROUND 1 - Generate Initial Output:</strong>
+        "Generate 15 survey questions about customer satisfaction with our EHR system"
+        [Review output for general direction and major issues]
+
+        <strong>ROUND 2 - Add Critical Context:</strong>
+        "Revise these questions to specifically address: (1) support response times, (2) UI usability after 
+        Q3 overhaul, (3) implementation experience, (4) integration capabilities. Also add customer segment 
+        screening questions (hospital size, tenure as customer)."
+        [Review for relevance and coverage]
+
+        <strong>ROUND 3 - Fix Specific Issues:</strong>
+        "Problems to fix:
+        - Question 3 uses leading language ('our excellent support') - rewrite neutrally
+        - Question 7 is double-barreled (asks about speed AND quality) - split into two questions  
+        - Question 12 is too long (78 characters) - shorten to under 60 for mobile
+        - Questions 14-15 (demographics) should move to the end
+        - Missing NPS question - add in standard format"
+        [Review for quality improvements]
+
+        <strong>ROUND 4 - Optimize for Constraints:</strong>
+        "Verify survey meets these requirements:
+        - Total time: 5-7 minutes (currently 8 - need to cut)
+        - Reading level: Grade 8 (questions 4, 9, 13 are too complex - simplify)
+        - Mobile friendly: All questions under 60 characters
+        - Include progress indicators: Group into 3 sections with clear labels
+
+        Make necessary adjustments to meet all constraints."
+        [Review for compliance]
+
+        <strong>ROUND 5 - Final Polish:</strong>
+        "Final review checklist:
+        - Are instructions clear for every question?
+        - Is skip logic properly defined?
+        - Are response options balanced and mutually exclusive?
+        - Is question flow logical (funnel approach)?
+        - Would a real hospital IT director complete this survey?
+
+        Make final refinements and provide rationale for key design choices."
+        [Final review and approval]
+
+        ---
+
+        <strong>Rapid Iteration for Analysis:</strong>
+
+        <strong>ITERATION 1:</strong> "Analyze these comments and identify main themes"
+        [AI provides: Theme 1, Theme 2, Theme 3...]
+
+        <strong>ITERATION 2:</strong> "Theme 2 is too broad - split it into more specific sub-themes"
+        [AI provides: Theme 2a, Theme 2b, Theme 2c]
+
+        <strong>ITERATION 3:</strong> "Theme 2b still mixes two concepts - separate them"
+        [AI provides: Theme 2b-i, Theme 2b-ii]
+
+        <strong>ITERATION 4:</strong> "Now that themes are properly defined, code all 400 responses"
+        [AI provides: Complete coding]
+
+        <strong>ITERATION 5:</strong> "Create crosstabs showing theme prevalence by customer segment"
+        [AI provides: Crosstab analysis]
+
+        <strong>ITERATION 6:</strong> "For themes mentioned by 20%+ of respondents, pull 3-5 representative quotes"
+        [AI provides: Quotes for major themes]
+
+        Each iteration builds on the previous one, progressively improving quality.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">5. Few-Shot Learning Technique</div>
+                        <p>Provide multiple examples to teach AI your exact standards and style.</p>
+                        <div class="code-block">
+        <strong>Teaching AI Your Insight Format:</strong>
+
+        "I'll show you 3 examples of well-formatted insights. Then you'll analyze new data using this exact format.
+
+        <strong>EXAMPLE 1 - GOOD INSIGHT:</strong>
+
+        <strong>FINDING:</strong> Implementation timeline is our strongest competitive advantage
+        <strong>EVIDENCE:</strong> 
+        - 78% of customers cited 'fast implementation' as primary reason for choosing us
+        - Our average: 3 months vs. Epic: 16 months, Cerner: 14 months
+        - Every month saved in implementation = +8 NPS points (r=0.81)
+        <strong>SO WHAT:</strong> 
+        - This is our #1 differentiator - protect it as we scale
+        - Current trend concerning: Implementation time increased from 3 to 4.2 months as customer base grew
+        - Action: Cap implementation team size per project at 80% of capacity to maintain speed
+        <strong>CONFIDENCE:</strong> High (large sample, strong correlation, validated with win/loss data)
+
+        <strong>EXAMPLE 2 - GOOD INSIGHT:</strong>
+
+        <strong>FINDING:</strong> Integration limitations are a growing concern but not yet a deal-breaker
+        <strong>EVIDENCE:</strong>
+        - 34% of customers mentioned integration challenges
+        - But only 8% rated it as top-3 priority issue
+        - No correlation with renewal likelihood (r=0.12, p=0.19)
+        - However, mentioned by 67% of enterprise customers vs. 21% of mid-market
+        <strong>SO WHAT:</strong>
+        - Not urgent for current base, but critical for enterprise segment growth
+        - Competitor differentiator: Epic has 2x more certified integrations
+        - Action: Prioritize top 10 integration requests from enterprise prospects (not all integration requests)
+        <strong>CONFIDENCE:</strong> Medium (mixed signals, segment differences suggest complexity)
+
+        <strong>EXAMPLE 3 - GOOD INSIGHT:</strong>
+
+        <strong>FINDING:</strong> UI overhaul may have contributed to NPS decline but isn't the primary driver
+        <strong>EVIDENCE:</strong>
+        - 43% mentioned UI changes, but sentiment is mixed (31% positive, 48% negative, 21% neutral)
+        - NPS decline started 2 months before UI launch, continued at same rate after
+        - Customers who onboarded after UI launch have same NPS as those before (42 vs. 43)
+        - Support tickets about UI peaked in month 1 post-launch, declined to baseline by month 3
+        <strong>SO WHAT:</strong>
+        - UI was a contributor but not the root cause (support issues are bigger driver)
+        - Change management issue: UI changes weren't adequately communicated
+        - Action: Improve change management process for future releases, but don't roll back UI
+        <strong>CONFIDENCE:</strong> High (temporal analysis, segment comparison, support ticket validation)
+
+        ---
+
+        Now analyze this new data set and format your insights EXACTLY like the examples above:
+        [Paste data]"
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">6. Prompt Chaining for Complex Workflows</div>
+                        <p>Break complex tasks into series of connected prompts, each building on previous output.</p>
+                        <div class="code-block">
+        <strong>Example: Complete Survey Design Workflow</strong>
+
+        <strong>PROMPT 1 - Research Objectives:</strong>
+        Input: Business problem description
+        Output: 4-6 specific, measurable research objectives
+        Save output as: OBJECTIVES.txt
+
+        <strong>PROMPT 2 - Variable Identification:</strong>
+        Input: OBJECTIVES.txt
+        Output: List of variables to measure for each objective
+        Save output as: VARIABLES.txt
+
+        <strong>PROMPT 3 - Question Generation:</strong>
+        Input: OBJECTIVES.txt + VARIABLES.txt
+        Output: Draft survey questions (15-20 questions)
+        Save output as: QUESTIONS_v1.txt
+
+        <strong>PROMPT 4 - Bias Check:</strong>
+        Input: QUESTIONS_v1.txt
+        Output: Identify any leading/biased language, suggest neutral alternatives
+        Save output as: BIAS_REVIEW.txt
+
+        <strong>PROMPT 5 - Question Revision:</strong>
+        Input: QUESTIONS_v1.txt + BIAS_REVIEW.txt
+        Output: Revised questions addressing all bias issues
+        Save output as: QUESTIONS_v2.txt
+
+        <strong>PROMPT 6 - Mobile Optimization:</strong>
+        Input: QUESTIONS_v2.txt
+        Output: Check character counts, simplify long questions, ensure mobile-friendly
+        Save output as: QUESTIONS_v3.txt
+
+        <strong>PROMPT 7 - Skip Logic Design:</strong>
+        Input: QUESTIONS_v3.txt
+        Output: Define skip logic and branching for conditional questions
+        Save output as: LOGIC_MAP.txt
+
+        <strong>PROMPT 8 - Timing Estimate:</strong>
+        Input: QUESTIONS_v3.txt + LOGIC_MAP.txt
+        Output: Estimated completion time with breakdown by section
+        Save output as: TIMING.txt
+
+        <strong>PROMPT 9 - Final Polish:</strong>
+        Input: QUESTIONS_v3.txt + LOGIC_MAP.txt + TIMING.txt
+        Output: Final survey with instructions, progress indicators, intro/outro text
+        Save output as: FINAL_SURVEY.txt
+
+        <strong>PROMPT 10 - Documentation:</strong>
+        Input: All previous outputs
+        Output: Survey design rationale document explaining key decisions
+        Save output as: DESIGN_RATIONALE.txt
+
+        Each prompt builds on previous work, creating a complete workflow.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Real-World Prompt Templates</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Template Library (Copy & Customize)</div>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Template 1: NPS Survey Design</h4>
+                            <div class="code-block">
+        <strong>CONTEXT:</strong>
+        [YOUR COMPANY] is a [INDUSTRY] company serving [TARGET MARKET]. We currently have an NPS of 
+        [CURRENT NPS] compared to industry benchmark of [BENCHMARK NPS]. Leadership wants to understand 
+        drivers of satisfaction and prioritize improvements for [TIMEFRAME].
+
+        <strong>LENGTH & FORMAT:</strong>
+        Generate a 15-question NPS survey with this exact structure:
+        - 1 standard NPS question (0-10 scale with follow-up)
+        - 8 satisfaction questions (7-point Likert: very dissatisfied to very satisfied)
+        → Focus these on [AREA 1], [AREA 2], [AREA 3]
+        - 3 multiple choice questions about [TOPICS]
+        - 2 open-ended questions:
+        → "What is ONE thing we should improve?"
+        → "What do you value most about [PRODUCT/SERVICE]?"
+        - 1 recommendation question: "How likely are you to recommend us to a colleague?"
+        Survey must complete in 5-7 minutes maximum.
+
+        <strong>EXAMPLES:</strong>
+        Likert format: "How satisfied are you with [SPECIFIC ASPECT]?"
+        1-Very Dissatisfied | 2-Dissatisfied | 3-Somewhat Dissatisfied | 4-Neutral | 5-Somewhat Satisfied | 6-Satisfied | 7-Very Satisfied
+
+        NPS follow-up format: "What is the primary reason for your score?"
+        [Open text, 200 character limit]
+
+        <strong>AUDIENCE:</strong>
+        Survey respondents are [DEMOGRAPHIC PROFILE]. They are [BUSY/TIME-CONSTRAINED]. Questions must be:
+        - Clear and jargon-free (8th grade reading level)
+        - Mobile-optimized (under 60 characters per question)
+        - Respectful of their time and expertise
+
+        <strong>REQUEST:</strong>
+        GENERATE a complete NPS survey that:
+        1. Follows standard NPS methodology
+        2. Identifies top 3-5 satisfaction drivers
+        3. Provides actionable insights for [SPECIFIC GOAL]
+        4. Avoids all leading or biased language
+        5. Sequences questions logically (funnel approach)
+        6. Includes proper instructions and context for each section
+
+        Include response options for all closed-ended questions. Provide rationale for key design decisions.
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Template 2: Open-Ended Response Analysis</h4>
+                            <div class="code-block">
+        <strong>CONTEXT:</strong>
+        Analyze [NUMBER] open-ended survey responses from [RESEARCH TYPE] conducted [TIMEFRAME]. 
+        Respondents are [DEMOGRAPHIC DESCRIPTION]. The research objective is to [SPECIFIC GOAL].
+
+        Background: [RELEVANT BUSINESS CONTEXT, BASELINE DATA, HYPOTHESES TO TEST]
+
+        <strong>LENGTH & FORMAT:</strong>
+        Identify 6-8 primary themes with this structure for EACH theme:
+
+        <strong>THEME NAME:</strong> [Descriptive title] (mentioned by X% of respondents, [HIGH/MEDIUM/LOW] priority)
+
+        <strong>EVIDENCE:</strong>
+        - [Frequency count and percentage]
+        - [Supporting quote 1 - with respondent context]
+        - [Supporting quote 2 - with respondent context]
+        - [Supporting quote 3 - with respondent context]
+        - [Statistical correlation with satisfaction if available]
+
+        <strong>BUSINESS IMPACT:</strong>
+        - [Specific impact on revenue/churn/satisfaction]
+        - [Comparison to baseline or competitors]
+        - [Financial/operational implications]
+
+        <strong>RECOMMENDATION:</strong>
+        - [Specific action with owner and timeline]
+        - [Expected outcome with metrics]
+        - [Priority level and rationale]
+
+        <strong>EXAMPLES:</strong>
+        [PASTE 1-2 EXAMPLES OF YOUR EXACT DESIRED OUTPUT FORMAT]
+
+        <strong>AUDIENCE:</strong>
+        This analysis is for [STAKEHOLDER ROLE]. They need:
+        - [SPECIFIC INFORMATION NEEDS]
+        - [DECISION TO BE MADE]
+        - [PREFERRED FORMAT/STYLE]
+
+        <strong>REQUEST:</strong>
+        ANALYZE the responses to:
+        1. IDENTIFY 6-8 primary themes (not just surface topics - dig for root causes)
+        2. PRIORITIZE themes by both frequency AND business impact
+        3. PROVIDE specific, representative quotes for each theme (not generic summaries)
+        4. QUANTIFY potential impact where possible (revenue, churn, satisfaction points)
+        5. RECOMMEND concrete, actionable interventions with clear success metrics
+        6. FLAG any patterns by respondent segment that should inform strategy
+
+        Paste responses below:
+        [PASTE ANONYMIZED RESPONSES]
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Template 3: Competitive Benchmarking Analysis</h4>
+                            <div class="code-block">
+        <strong>CONTEXT:</strong>
+        Analyze competitive positioning for [YOUR COMPANY] in [MARKET]. Focus on [SPECIFIC ASPECTS: pricing, 
+        features, satisfaction, positioning]. Research includes customer perceptions from recent survey 
+        of [SAMPLE DESCRIPTION].
+
+        Key competitors:
+        - [COMPETITOR 1]: [Market position, NPS, key strengths/weaknesses]
+        - [COMPETITOR 2]: [Market position, NPS, key strengths/weaknesses]  
+        - [COMPETITOR 3]: [Market position, NPS, key strengths/weaknesses]
+
+        <strong>LENGTH & FORMAT:</strong>
+        Provide 3-4 page competitive analysis with these sections:
+
+        1. EXECUTIVE SUMMARY (0.5 pages)
+        - Bottom line competitive position
+        - Top 3 competitive advantages
+        - Top 3 competitive vulnerabilities
+        - Strategic recommendation
+
+        2. DETAILED COMPARISON (2 pages)
+        - Create comparison table: [YOUR COMPANY] vs. each competitor
+        - Dimensions: [LIST SPECIFIC DIMENSIONS TO COMPARE]
+        - Include customer quotes showing perceptions
+        - Highlight statistical significance of differences
+
+        3. POSITIONING MAP (0.5 pages)
+        - 2x2 matrix plotting all players
+        - X-axis: [DIMENSION 1]
+        - Y-axis: [DIMENSION 2]
+        - Identify white space opportunities
+
+        4. STRATEGIC IMPLICATIONS (1 page)
+        - What should we double down on?
+        - What should we defend?
+        - What gaps should we fill?
+        - What messaging should we adjust?
+
+        <strong>EXAMPLES:</strong>
+        Competitive insight format: "[COMPETITOR] beats us on [DIMENSION] (their NPS: X vs. ours: Y, 
+        p<0.05), driven by [SPECIFIC FACTORS per customer comments]. This matters because [BUSINESS 
+        IMPACT]. Recommend: [SPECIFIC ACTION]."
+
+        <strong>AUDIENCE:</strong>
+        [STAKEHOLDER DESCRIPTION] who will use this to [SPECIFIC DECISION].
+
+        <strong>REQUEST:</strong>
+        ANALYZE competitive data to:
+        1. IDENTIFY our strongest competitive advantages (with evidence)
+        2. SURFACE our most significant competitive vulnerabilities
+        3. COMPARE customer perceptions vs. actual differences (perception gaps)
+        4. RECOMMEND specific positioning changes and product/service priorities
+        5. QUANTIFY opportunity size for each recommendation
+
+        Data:
+        [PASTE RELEVANT DATA - CUSTOMER SURVEY RESULTS, WIN/LOSS FEEDBACK, ETC.]
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #2563eb;">Template 4: Executive Summary Generation</h4>
+                            <div class="code-block">
+        <strong>CONTEXT:</strong>
+        Transform this detailed research report into an executive summary for [AUDIENCE: CEO, Board, etc.].
+
+        Audience characteristics:
+        - Role: [SPECIFIC ROLE]
+        - Decision at stake: [WHAT THEY'RE DECIDING]
+        - Time available: [REALISTIC TIME CONSTRAINT]
+        - Preferences: [DATA VS. STORIES, DETAILS VS. SUMMARY, OPTIONS VS. RECOMMENDATIONS]
+        - Risk tolerance: [HIGH/MEDIUM/LOW]
+        - Current knowledge: [WHAT THEY ALREADY KNOW/DON'T KNOW]
+
+        <strong>LENGTH & FORMAT:</strong>
+        Create 1-page executive summary (400-500 words) with this exact structure:
+
+        <strong>HEADLINE (1 sentence):</strong>
+        The single most important finding or recommendation
+
+        <strong>KEY FINDINGS (3-4 bullets, 1-2 sentences each):</strong>
+        - [Finding 1 with metric and business implication]
+        - [Finding 2 with metric and business implication]
+        - [Finding 3 with metric and business implication]
+        - [Finding 4 with metric and business implication]
+
+        <strong>RECOMMENDATIONS (3-5 priority actions):</strong>
+        1. [Action] - [Expected outcome] - [Owner] - [Timeline]
+        2. [Action] - [Expected outcome] - [Owner] - [Timeline]
+        3. [Action] - [Expected outcome] - [Owner] - [Timeline]
+
+        <strong>NEXT STEPS:</strong>
+        [What happens next, when, who's responsible]
+
+        <strong>EXAMPLES:</strong>
+        Good executive summary opening: "Invest $2M in customer support. This will reduce churn from 13% 
+        to 9% and retain $5M in annual recurring revenue. Support response time is the #1 satisfaction 
+        driver (r=0.81, p<0.001) and directly predicts renewal likelihood."
+
+        Bad executive summary opening: "We conducted a survey of 400 customers to understand satisfaction 
+        drivers. The methodology included..."
+
+        <strong>AUDIENCE-SPECIFIC REQUIREMENTS:</strong>
+        - Lead with the recommendation (don't bury it)
+        - Use decisive language ("we recommend" not "you could consider")
+        - Focus on business outcomes (revenue, churn, market share) not research details
+        - Provide confidence level for key findings
+        - Avoid methodology details (save for appendix)
+        - Bold the key numbers for scannability
+        - Assume reader is smart but very busy
+
+        <strong>REQUEST:</strong>
+        TRANSFORM this detailed report into a compelling executive summary that:
+        1. Leads with the most important finding
+        2. Supports with 3-4 data-driven bullets
+        3. Provides clear, prioritized recommendations
+        4. Uses language appropriate for [SPECIFIC AUDIENCE]
+        5. Fits on ONE PAGE with no truncation
+
+        Detailed report:
+        [PASTE FULL REPORT OR KEY SECTIONS]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Troubleshooting Guide</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Common Problems & Solutions</div>
+                        
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI output is too generic/vague</h4>
+                            <p><strong>Symptoms:</strong> Output could apply to any company, lots of general statements, no specifics</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> Insufficient context provided</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Add 3x more context. Include:</p>
+                            <ul>
+                                <li>Specific industry dynamics and competitive landscape</li>
+                                <li>Actual numbers (current metrics, baseline data)</li>
+                                <li>Specific business objectives and decisions at stake</li>
+                                <li>Detailed audience profile</li>
+                                <li>Real examples from your domain</li>
+                            </ul>
+                            <div class="code-block">
+        <strong>Before (generic):</strong>
+        "Create survey questions about customer satisfaction"
+
+        <strong>After (specific):</strong>
+        "Create survey questions about customer satisfaction for hospital IT directors evaluating our 
+        EHR system. Current NPS is 42 vs. competitor's 61. We need to understand if the decline from 
+        52 to 42 over 6 months is driven by: (1) UI changes in Q3, (2) support response times increasing 
+        from 1.8 to 3.2 days, or (3) competitive pressure from [Competitor X] who launched pricing 
+        campaign. Survey must take under 7 minutes, work on mobile, and provide actionable insights 
+        for board meeting on June 15th."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI misses the mark completely</h4>
+                            <p><strong>Symptoms:</strong> Output addresses wrong question, wrong audience, or wrong format</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> Unclear or misunderstood request</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Use explicit action verbs and double-check understanding</p>
+                            <div class="code-block">
+        Add this to your prompt:
+
+        "Before you begin, confirm your understanding:
+        1. What is the primary task I'm asking you to do?
+        2. What format should the output be in?
+        3. Who is the intended audience?
+        4. What business decision will this inform?
+
+        If anything is unclear, ask me before proceeding."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI generates biased or leading questions</h4>
+                            <p><strong>Symptoms:</strong> Questions assume positive things about your product, use loaded language</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> Insufficient bias prevention instructions</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Add explicit neutrality requirements and self-checking</p>
+                            <div class="code-block">
+        Add to prompt:
+
+        "CRITICAL: Questions must be completely neutral. For EACH question you generate, check:
+        - Does it assume anything positive or negative about us?
+        - Would a satisfied customer and dissatisfied customer both feel comfortable answering?
+        - Are there any loaded words (excellent, poor, innovative, outdated)?
+        - Does it lead respondent toward any particular answer?
+
+        If any question fails these tests, revise it. Then show me both the original and revised version 
+        so I can see your quality control process."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI analysis is superficial</h4>
+                            <p><strong>Symptoms:</strong> Obvious themes, no deep insights, feels like "anyone could have said this"</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> No prompting for deeper analysis</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Force AI to dig deeper with multi-level prompting</p>
+                            <div class="code-block">
+        Use this multi-stage approach:
+
+        "STAGE 1: Analyze responses and identify 6-8 surface themes
+
+        STAGE 2: For each theme, dig deeper:
+        - WHY are customers saying this? What's the underlying need or pain?
+        - What root causes drive this theme?
+        - Are there patterns by segment that reveal something important?
+        - What are customers NOT saying that's also important?
+
+        STAGE 3: Connect themes:
+        - How do these themes relate to each other?
+        - Are there clusters of related issues?
+        - What's the higher-order story these themes tell?
+
+        STAGE 4: Generate insights:
+        - What non-obvious patterns emerged?
+        - What surprised you?
+        - What contradicts conventional wisdom?
+        - What should leadership know that isn't obvious from surface themes?"
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI recommendations are too generic</h4>
+                            <p><strong>Symptoms:</strong> "Improve customer service", "Invest in product", "Communicate better"</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> No specificity requirements</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Require specific, measurable, actionable recommendations</p>
+                            <div class="code-block">
+        Add this to prompt:
+
+        "For EACH recommendation, you must provide:
+
+        1. SPECIFIC ACTION: What exactly should be done? (Not "improve X" but "implement A, B, C")
+        2. OWNER: Who specifically should do this? (role/title)
+        3. TIMELINE: When should this start and complete? (specific dates or week ranges)
+        4. RESOURCES: What budget/headcount is needed?
+        5. SUCCESS METRICS: How will we know it worked? (specific KPIs with targets)
+        6. EXPECTED OUTCOME: What will this achieve? (quantified impact)
+        7. PRIORITY: Why now? (urgency and business case)
+
+        Example of good recommendation:
+        'Implement 24-hour SLA for P1 support tickets by June 1. VP Customer Success to hire 3 senior 
+        support engineers ($450K annual cost). Success metric: 95% of P1 tickets resolved within 24 hours, 
+        measured monthly. Expected outcome: NPS increase from 42 to 50 (+8 points) by Q3, based on 
+        correlation analysis. Priority: CRITICAL - directly addresses #1 churn driver affecting $2.4M 
+        in at-risk ARR.'"
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI output is too long/verbose</h4>
+                            <p><strong>Symptoms:</strong> Lengthy prose, repetitive points, buries the lead</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> No length constraints specified</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Set explicit length limits and format requirements</p>
+                            <div class="code-block">
+        Add to prompt:
+
+        "STRICT LENGTH LIMITS:
+        - Total output: [X] pages maximum (non-negotiable)
+        - Executive summary: 1 page (400-500 words)
+        - Each finding: 2-3 sentences maximum
+        - Each recommendation: 1-2 sentences
+
+        FORMATTING REQUIREMENTS:
+        - Lead with most important finding (first sentence)
+        - Use bullet points, not paragraphs
+        - Bold key numbers and findings
+        - No throat-clearing or preambles
+        - Every sentence must add value
+
+        If you can't fit everything in these limits, prioritize ruthlessly. Cut nice-to-know, keep need-to-know."
+                            </div>
+                        </div>
+
+                        <div style="background: white; padding: 16px; border-radius: 8px; margin: 16px 0;">
+                            <h4 style="color: #ef4444;">PROBLEM: AI makes unsupported claims</h4>
+                            <p><strong>Symptoms:</strong> Confident statements without data, speculation presented as fact</p>
+                            <p style="margin-top: 8px;"><strong>Diagnosis:</strong> No requirement to cite evidence</p>
+                            <p style="margin-top: 8px;"><strong>Solution:</strong> Require evidence for every claim</p>
+                            <div class="code-block">
+        Add to prompt:
+
+        "EVIDENCE REQUIREMENT:
+        EVERY claim must be supported by specific evidence from the data. For each finding:
+        - Quote exact statistic or percentage
+        - Provide representative quote with respondent context
+        - Show correlation coefficient if relevant
+        - Compare to baseline or benchmark
+        - Report sample size and significance level
+
+        If you cannot find evidence in the data for a claim, do NOT make the claim. 
+        Say 'insufficient data' instead of speculating.
+
+        Format: [CLAIM] [EVIDENCE FROM DATA] [STATISTICAL SUPPORT IF AVAILABLE]
+
+        Example: 'Support response time is the primary satisfaction driver (r=0.81, p<0.001, n=400). 
+        Customers with response times >2 days have NPS of 28 vs. 61 for those with <24 hour responses 
+        (37-point gap, p<0.001). Representative quote: "I've had tickets sit for a week with no response. 
+        That's unacceptable" - Hospital CIO, 400-bed facility, 2-year customer.'"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Practice Exercises</h2>
+                    
+                    <div class="card">
+                        <div class="card-title">Exercise 1: Improve This Weak Prompt</div>
+                        
+                        <div class="warning-box">
+                            <strong>WEAK PROMPT:</strong>
+                            <p>"Make survey questions about customer satisfaction with our product"</p>
+                        </div>
+                        
+                        <p style="margin-top: 16px;"><strong>Your Task:</strong> Rewrite using the CLEAR framework. Make it 10x more specific.</p>
+                        
+                        <details style="margin-top: 16px;">
+                            <summary style="cursor: pointer; color: #2563eb; font-weight: 600;">Click to see example solution</summary>
+                            <div class="success-box" style="margin-top: 12px;">
+                                <div class="code-block">
+        <strong>CONTEXT:</strong>
+        You are designing a customer satisfaction survey for TechFlow CRM, a B2B SaaS company providing 
+        customer relationship management software to small businesses (10-50 employees). We have 5,000 
+        customers and are experiencing declining renewal rates (from 89% to 82% over 6 months). Main 
+        competitor (Salesforce) has NPS of 38 vs. our 31. Leadership needs to decide whether to invest 
+        $1.5M in customer support expansion or product development. Decision at board meeting July 15th.
+
+        <strong>LENGTH & FORMAT:</strong>
+        Generate 15 survey questions with this distribution:
+        - 1 NPS question (standard 0-10 format)
+        - 8 seven-point Likert scales (very dissatisfied to very satisfied)
+        → 3 questions about product usability
+        → 3 questions about customer support
+        → 2 questions about value for money
+        - 4 multiple choice questions (5-6 options each)
+        → Most-used features
+        → Biggest pain point
+        → Competitive consideration
+        → Primary business benefit
+        - 2 open-ended questions
+        → "What ONE improvement would make the biggest difference?"
+        → "What do you value most about TechFlow?"
+        Must complete in under 6 minutes on mobile.
+
+        <strong>EXAMPLES:</strong>
+        Likert format: "How satisfied are you with the ease of creating custom reports?"
+        1-Very Dissatisfied | 2-Dissatisfied | 3-Somewhat Dissatisfied | 4-Neutral | 5-Somewhat Satisfied | 6-Satisfied | 7-Very Satisfied
+
+        Multiple choice format: "Which feature do you use most frequently?"
+        a) Contact management  b) Email campaigns  c) Sales pipeline  d) Reporting  e) Integrations  f) Other
+
+        <strong>AUDIENCE:</strong>
+        Survey respondents are small business owners and office managers (ages 30-55, 60% female, 
+        non-technical, extremely busy). Questions must be:
+        - Clear and jargon-free (8th grade reading level)
+        - Under 50 characters for mobile screens
+        - Respectful of their limited time
+        - Focused on practical business outcomes, not technical features
+
+        <strong>REQUEST:</strong>
+        GENERATE a complete satisfaction survey that:
+        1. Identifies whether support or product issues are driving churn
+        2. Tests specific hypotheses about renewal decline
+        3. Provides clear prioritization for investment decision
+        4. Uses completely neutral language (no leading questions)
+        5. Follows mobile-first design principles
+        6. Includes proper skip logic to reduce respondent burden
+
+        Include response options for all closed-ended questions and brief rationale for key design decisions.
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">Exercise 2: Debug This Problematic Prompt</div>
+                        
+                        <div class="warning-box">
+                            <strong>PROBLEMATIC PROMPT:</strong>
+                            <div class="code-block">
+        "Analyze this customer feedback and tell me what customers think. Here are some comments:
+        - 'Your product is okay'
+        - 'Support could be better'
+        - 'I like some features'
+
+        What should we do?"
+                            </div>
+                        </div>
+                        
+                        <p style="margin-top: 16px;"><strong>Your Task:</strong> Identify at least 5 problems with this prompt and fix them.</p>
+                        
+                        <details style="margin-top: 16px;">
+                            <summary style="cursor: pointer; color: #2563eb; font-weight: 600;">Click to see problems & solution</summary>
+                            <div style="margin-top: 12px;">
+                                <div class="warning-box">
+                                    <strong>PROBLEMS:</strong>
+                                    <ol>
+                                        <li>No context about company, product, industry, or business situation</li>
+                                        <li>Only 3 comments (way too small sample for analysis)</li>
+                                        <li>Vague, generic comments with no useful detail</li>
+                                        <li>No specification of desired output format</li>
+                                        <li>No audience information (who will use this analysis?)</li>
+                                        <li>No clear request (what exactly should AI do?)</li>
+                                        <li>No examples of desired output quality</li>
+                                    </ol>
+                                </div>
+                                
+                                <div class="success-box" style="margin-top: 16px;">
+                                    <strong>IMPROVED PROMPT:</strong>
+                                    <div class="code-block">
+        <strong>CONTEXT:</strong>
+        Analyze 500 customer feedback comments from Q1 2024 satisfaction survey for CloudStore, an 
+        e-commerce platform for small retailers. NPS declined from 45 to 38 over 6 months. Main 
+        competitor (Shopify) has NPS of 62. We need to understand satisfaction drivers to inform 
+        product roadmap for H2 2024.
+
+        Customer profile: Small retail business owners (1-10 employees), ages 35-60, not highly 
+        technical, running businesses in apparel, home goods, and specialty products.
+
+        <strong>LENGTH & FORMAT:</strong>
+        Identify 6-8 primary themes with this structure for each:
+
+        THEME: [Name] ([X]% of respondents, [HIGH/MEDIUM/LOW] priority)
+        EVIDENCE: [Frequency], [3 representative quotes], [correlation with NPS if available]
+        BUSINESS IMPACT: [Effect on revenue/churn/satisfaction]
+        ROOT CAUSE: [Why this is happening]
+        RECOMMENDATION: [Specific action, owner, timeline, expected outcome]
+
+        <strong>EXAMPLES:</strong>
+        [Provide 1-2 examples of perfectly formatted theme analysis]
+
+        <strong>AUDIENCE:</strong>
+        VP Product and engineering team will use this to prioritize Q3 roadmap. They need:
+        - Specific, actionable insights (not general observations)
+        - Clear prioritization by business impact
+        - Technical feasibility considerations
+        - Quick wins vs. long-term improvements identified
+
+        <strong>REQUEST:</strong>
+        ANALYZE the 500 comments to:
+        1. IDENTIFY 6-8 primary themes (dig for root causes, not just surface complaints)
+        2. PRIORITIZE by both frequency AND business impact on retention
+        3. PROVIDE representative quotes showing customer voice
+        4. QUANTIFY potential impact on NPS/churn where possible
+        5. RECOMMEND specific product improvements with expected outcomes
+
+        Comments dataset:
+        [Paste 500 properly anonymized customer comments with metadata: respondent ID, NPS score, customer segment, date]
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h3 style="margin-bottom: 12px;">Module 2 Complete!</h3>
+                    <p style="margin-bottom: 16px;">You've mastered prompt engineering for market research. You can now craft prompts that consistently generate professional-grade outputs. Key takeaways:</p>
+                    <ul>
+                        <li><strong>CLEAR Framework</strong> is your foundation - use it for every complex prompt</li>
+                        <li><strong>Context is king</strong> - more specific context = better outputs</li>
+                        <li><strong>Examples teach faster</strong> than descriptions - show AI what you want</li>
+                        <li><strong>Iteration is normal</strong> - plan for 3-5 refinement rounds</li>
+                        <li><strong>Constraints prevent problems</strong> - specify what you DON'T want</li>
+                    </ul>
+                    <button class="btn btn-success" onclick="completeModule('prompt-engineering')">Mark Complete & Earn 600 XP →</button>
+                </div>
+            </div>
+        `,
+
+    
+ };
+
+ // Event Listeners
+ document.getElementById('login-form').addEventListener('submit', function(e) {
+     e.preventDefault();
+     const username = document.getElementById('username').value;
+     const password = document.getElementById('password').value;
+     
+     if (credentials[username] && credentials[username] === password) {
+         userProfile.username = username;
+         document.getElementById('login-screen').style.display = 'none';
+         document.getElementById('platform').style.display = 'block';
+         updateUI();
+         loadModule('dashboard');
+     } else {
+         document.getElementById('error-message').style.display = 'block';
+         setTimeout(() => {
+             document.getElementById('error-message').style.display = 'none';
+         }, 3000);
+     }
+ });
+
+ document.getElementById('logout-btn').addEventListener('click', function() {
+     document.getElementById('platform').style.display = 'none';
+     document.getElementById('login-screen').style.display = 'flex';
+     document.getElementById('username').value = '';
+     document.getElementById('password').value = '';
+     userProfile = { username: '', xp: 0, level: 1, completedModules: new Set() };
+ });
+
+ document.querySelectorAll('.module-btn').forEach(btn => {
+     btn.addEventListener('click', function() {
+         const module = this.getAttribute('data-module');
+         loadModule(module);
+     });
+ });
+
+ function loadModule(moduleName) {
+     document.querySelectorAll('.module-btn').forEach(btn => btn.classList.remove('active'));
+     const btn = document.querySelector(`[data-module="${moduleName}"]`);
+     if (btn) btn.classList.add('active');
+     
+     const content = moduleContent[moduleName];
+     if (content) {
+         document.getElementById('content-area').innerHTML = content.content;
+         window.scrollTo(0, 0);
+     }
+ }
+
+ function completeModule(moduleName) {
+     if (!userProfile.completedModules.has(moduleName)) {
+         userProfile.completedModules.add(moduleName);
+         const xp = moduleContent[moduleName].xp;
+         userProfile.xp += xp;
+         userProfile.level = Math.floor(userProfile.xp / 1000) + 1;
+         
+         const btn = document.querySelector(`[data-module="${moduleName}"]`);
+         if (btn) btn.classList.add('completed');
+         
+         updateUI();
+         
+         const nextModule = getNextModule(moduleName);
+         if (nextModule) {
+             setTimeout(() => {
+                 if (confirm(`Great job! You earned ${xp} XP. Ready to continue to the next module: ${nextModule}?`)) {
+                     loadModule(nextModule);
+                 }
+             }, 500);
+         } else {
+             alert(`Congratulations! You've completed all modules and earned ${userProfile.xp} total XP!`);
+         }
+     }
+ }
+
+ function getNextModule(currentModule) {
+     const sequence = ['dashboard', 'fundamentals', 'prompt-engineering', 'survey-design', 
+                     'data-analysis', 'qualitative', 'ethics', 'client-solutions', 
+                     'advanced', 'certification'];
+     const currentIndex = sequence.indexOf(currentModule);
+     return currentIndex >= 0 && currentIndex < sequence.length - 1 ? sequence[currentIndex + 1] : null;
+ }
+
+ function updateUI() {
+     document.getElementById('user-display').textContent = userProfile.username;
+     document.getElementById('xp-display').textContent = userProfile.xp.toLocaleString();
+     document.getElementById('modules-display').textContent = `${userProfile.completedModules.size}/10`;
+     document.getElementById('level-display').textContent = userProfile.level;
+     
+     const rank = userProfile.level >= 8 ? 'Expert' : 
+                 userProfile.level >= 5 ? 'Advanced' : 
+                 userProfile.level >= 3 ? 'Intermediate' : 'Novice';
+     document.getElementById('rank-display').textContent = rank;
+     
+     const progress = (userProfile.completedModules.size / 10) * 100;
+     document.getElementById('overall-progress').style.width = progress + '%';
+     document.getElementById('progress-text').textContent = Math.round(progress) + '% Complete';
+ }
+
+ // Initialize
+ loadModule('dashboard');
+ </script>
+
+
+</body>
+</html>
